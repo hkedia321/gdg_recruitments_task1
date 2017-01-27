@@ -1,0 +1,30 @@
+.quotecard{
+	margin-top: 0%;
+	padding: 30px;
+	min-height: 200px;
+	position: relative;
+}
+.content-wrap{
+
+}
+body{
+	background-image: url('bg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 100vh;
+}
+
+.loadinggif{
+	max-width: 20%;
+	max-height: 20%;
+}
+.left-quote{
+	position: absolute;
+	left: 20px;
+	top: 20px;
+}
+.right-quote{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}

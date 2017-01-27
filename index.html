@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Quotes</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="materialize/css/materialize.min.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+		<br><br>
+			<div class="content-wrap">
+				<h4 class="center-align white-text">Get your daily dose of laughter</h4>
+				<div class="col s12 m8 offset-m2">
+					<div class="card hoverable quotecard center-align valign-wrapper">
+						<i class="fa fa-quote-left left-quote" aria-hidden="true"></i>
+						<div class="center-align">
+							<h5 class="center-align"><span id="quoteplace" class="center-align valign"></span></h5>
+						</div>
+						<i class="fa fa-quote-right right-quote" aria-hidden="true"></i> 
+					</div>
+					<div class="button-div center">
+						<button id="loadbut" class="btn green waves-effect waves-light">Tell me a Joke !</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		var loadbut=$("#loadbut");
+		var quoteplace=$("#quoteplace");
+		function progress_active(){
+			quoteplace.fadeOut();
+			loadbut.addClass("disabled");
+		}
+		function progress_complete(quote){
+			
+			loadbut.removeClass("disabled");
+			quoteplace.html(quote);
+			quoteplace.fadeIn();
+		}
+		function loadnext()
+		{
+			progress_active();
+			$.ajax({
+				url: 'http://api.icndb.com/jokes/random',
+				cache: false,
+				success: function(result){
+					progress_complete(result.value.joke);
+				},
+				complete: function(){
+					progress_complete(result.value.joke);
+				}
+			});
+			
+		}
+
+		loadbut.click(function(){
+			loadnext();
+		});
+		$(document).ready(function(){
+			loadnext();
+		});
+	</script>
+</body>
+</html>
